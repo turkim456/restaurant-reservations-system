@@ -31,10 +31,9 @@ def menu():
 
 
 def Vaild_number():
-    # menu_numbers = ["1", "2", "3", "4"]
-
+   
     while True:
-        menu()  # Show main menu
+        menu()  
         user_input = input("Choose a service (1-4): ").strip()
 
         if user_input == "1":
@@ -93,10 +92,15 @@ def new_booking():
             print("All times full for this day!")
             return None
 
-        print(f"Available times for {chosen_day}: {schedule[chosen_day]}")
-        chosen_time = input("Choose time from above: ")
+        print(f"\nAvailable times for {chosen_day}:")
+        times_list = schedule[chosen_day]
+        for i, time_label in enumerate(times_list):
+            print(f"{i} - {time_label}")
 
-        if chosen_time in schedule[chosen_day]:
+        choice = input("Select time number: ")
+        if choice.isdigit() and 0 <= int(choice) < len(times_list):
+            chosen_time = times_list[int(choice)]
+            
             while True:
                 fname = input("Enter your First Name: ").strip().capitalize()
                 if fname.isalpha() and len(fname) >= 3:
@@ -118,7 +122,7 @@ def new_booking():
             full_name = f"{fname} {lname}"
             valid_time = False
         else:
-            print("Please enter a valid time from the list.")
+            print("Please enter a valid number from the list.")
 
     file_name = "confirmed.csv"
     file_is_there = os.path.exists(file_name)
