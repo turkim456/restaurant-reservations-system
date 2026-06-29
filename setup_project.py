@@ -27,7 +27,7 @@ if os.path.exists(date_file):
 
 
 if not already_updated:
-    # 1. Update the Schedule
+
     schedule = {}
     today = datetime.now()
     for i in range(7):
@@ -41,13 +41,11 @@ if not already_updated:
         for d, t in schedule.items():
             writer.writerow({"day": d, "time": json.dumps(t)})
 
-    
     with open(date_file, "w") as f:
         f.write(today_str)
 
     print("Daily cleanup finished: The 7-day schedule has been updated.")
 
-    
     if os.path.exists("confirmed.csv"):
         temp_rows = []
         today_date_cmp = datetime.now().strftime("%Y-%m-%d")
